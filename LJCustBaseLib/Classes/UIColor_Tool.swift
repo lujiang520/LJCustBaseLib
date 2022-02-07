@@ -31,120 +31,120 @@ public extension UIColor {
     
 }
 
-public extension UIColor {
-    // UIColor -> Hex String
-    var hexString: String? {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-         
-        let multiplier = CGFloat(255.999999)
-         
-        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-            return nil
-        }
-         
-        if alpha == 1.0 {
-            return String(
-                format: "#%02lX%02lX%02lX",
-                Int(red * multiplier),
-                Int(green * multiplier),
-                Int(blue * multiplier)
-            )
-        }
-        else {
-            return String(
-                format: "#%02lX%02lX%02lX%02lX",
-                Int(red * multiplier),
-                Int(green * multiplier),
-                Int(blue * multiplier),
-                Int(alpha * multiplier)
-            )
-        }
-    }
-}
+//public extension UIColor {
+//    // UIColor -> Hex String
+//    var hexString: String? {
+//        var red: CGFloat = 0
+//        var green: CGFloat = 0
+//        var blue: CGFloat = 0
+//        var alpha: CGFloat = 0
+//
+//        let multiplier = CGFloat(255.999999)
+//
+//        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+//            return nil
+//        }
+//
+//        if alpha == 1.0 {
+//            return String(
+//                format: "#%02lX%02lX%02lX",
+//                Int(red * multiplier),
+//                Int(green * multiplier),
+//                Int(blue * multiplier)
+//            )
+//        }
+//        else {
+//            return String(
+//                format: "#%02lX%02lX%02lX%02lX",
+//                Int(red * multiplier),
+//                Int(green * multiplier),
+//                Int(blue * multiplier),
+//                Int(alpha * multiplier)
+//            )
+//        }
+//    }
+//}
 
 
-// MARK: 通过16进制初始化UIColor
-/**
- ** 用法如下：**
- let colorR = UIColor(hexStr: "0xf00f")
- let colorG = UIColor(hexStr: "0X0f0f")
- let colorB = UIColor(hexStr: "#0fff")
-
- let colorRR = UIColor(hexStr: "0xff0000ff")
- let colorGG = UIColor(hexStr: "0X00ff00ff")
- let colorBB = UIColor(hexStr: "#0000ffff")
-
- let colorRN = UIColor(hexNum: 0xf00f)
- let colorGN = UIColor(hexNum: 0x00ff00)
- let colorBN = UIColor(hexNum: 0x0000ff)
- */
-public extension UIColor {
-    
-    convenience init?(lj_hexNum: Int) {
-        self.init(lj_hexStr: String(lj_hexNum, radix: 16))
-    }
-    
-    convenience init?(lj_hexStr: String?) {
-        guard let tempStr = lj_hexStr else {
-            return nil
-        }
-        var hex = tempStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        if hex.hasPrefix("#") {
-            hex.remove(at: hex.startIndex)
-        }
-        if hex.hasPrefix("0x") || hex.hasPrefix(("0X")) {
-            hex.removeSubrange((hex.startIndex ..< hex.index(hex.startIndex, offsetBy: 2)))
-        }
-        
-        guard let hexNum = Int(hex, radix: 16) else {
-            self.init()
-            return nil
-        }
-        switch hex.count {
-        case 3:
-            self.init(red: CGFloat(((hexNum & 0xF00) >> 8).duplicate4bits) / 255.0,
-                      green: CGFloat(((hexNum & 0x0F0) >> 4).duplicate4bits) / 255.0,
-                      blue: CGFloat((hexNum & 0x00F).duplicate4bits) / 255.0,
-                      alpha: 1.0)
-        case 4:
-            self.init(red: CGFloat(((hexNum & 0xF000) >> 12).duplicate4bits) / 255.0,
-                      green: CGFloat(((hexNum & 0x0F00) >> 8).duplicate4bits) / 255.0,
-                      blue: CGFloat(((hexNum & 0x00F0) >> 4).duplicate4bits) / 255.0,
-                      alpha: CGFloat((hexNum & 0x000F).duplicate4bits) / 255.0)
-        case 6:
-            self.init(red: CGFloat((hexNum & 0xFF0000) >> 16) / 255.0,
-                      green: CGFloat((hexNum & 0x00FF00) >> 8) / 255.0,
-                      blue: CGFloat((hexNum & 0x0000FF) >> 0) / 255.0,
-                      alpha: 1.0)
-        case 8:
-            self.init(red: CGFloat((hexNum & 0xFF000000) >> 24) / 255.0,
-                      green: CGFloat((hexNum & 0x00FF0000) >> 16) / 255.0,
-                      blue: CGFloat((hexNum & 0x0000FF00) >> 8) / 255.0,
-                      alpha: CGFloat(hexNum & 0x000000FF) / 255.0)
-        default:
-            self.init()
-            return nil
-        }
-    }
-    
-}
-
-private extension Int {
-    var duplicate4bits: Int {
-        return self << 4 + self
-    }
-}
-
-public extension UIColor {
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return (red, green, blue, alpha)
-    }
-}
+//// MARK: 通过16进制初始化UIColor
+///**
+// ** 用法如下：**
+// let colorR = UIColor(hexStr: "0xf00f")
+// let colorG = UIColor(hexStr: "0X0f0f")
+// let colorB = UIColor(hexStr: "#0fff")
+//
+// let colorRR = UIColor(hexStr: "0xff0000ff")
+// let colorGG = UIColor(hexStr: "0X00ff00ff")
+// let colorBB = UIColor(hexStr: "#0000ffff")
+//
+// let colorRN = UIColor(hexNum: 0xf00f)
+// let colorGN = UIColor(hexNum: 0x00ff00)
+// let colorBN = UIColor(hexNum: 0x0000ff)
+// */
+//public extension UIColor {
+//
+//    convenience init?(lj_hexNum: Int) {
+//        self.init(lj_hexStr: String(lj_hexNum, radix: 16))
+//    }
+//
+//    convenience init?(lj_hexStr: String?) {
+//        guard let tempStr = lj_hexStr else {
+//            return nil
+//        }
+//        var hex = tempStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//        if hex.hasPrefix("#") {
+//            hex.remove(at: hex.startIndex)
+//        }
+//        if hex.hasPrefix("0x") || hex.hasPrefix(("0X")) {
+//            hex.removeSubrange((hex.startIndex ..< hex.index(hex.startIndex, offsetBy: 2)))
+//        }
+//
+//        guard let hexNum = Int(hex, radix: 16) else {
+//            self.init()
+//            return nil
+//        }
+//        switch hex.count {
+//        case 3:
+//            self.init(red: CGFloat(((hexNum & 0xF00) >> 8).duplicate4bits) / 255.0,
+//                      green: CGFloat(((hexNum & 0x0F0) >> 4).duplicate4bits) / 255.0,
+//                      blue: CGFloat((hexNum & 0x00F).duplicate4bits) / 255.0,
+//                      alpha: 1.0)
+//        case 4:
+//            self.init(red: CGFloat(((hexNum & 0xF000) >> 12).duplicate4bits) / 255.0,
+//                      green: CGFloat(((hexNum & 0x0F00) >> 8).duplicate4bits) / 255.0,
+//                      blue: CGFloat(((hexNum & 0x00F0) >> 4).duplicate4bits) / 255.0,
+//                      alpha: CGFloat((hexNum & 0x000F).duplicate4bits) / 255.0)
+//        case 6:
+//            self.init(red: CGFloat((hexNum & 0xFF0000) >> 16) / 255.0,
+//                      green: CGFloat((hexNum & 0x00FF00) >> 8) / 255.0,
+//                      blue: CGFloat((hexNum & 0x0000FF) >> 0) / 255.0,
+//                      alpha: 1.0)
+//        case 8:
+//            self.init(red: CGFloat((hexNum & 0xFF000000) >> 24) / 255.0,
+//                      green: CGFloat((hexNum & 0x00FF0000) >> 16) / 255.0,
+//                      blue: CGFloat((hexNum & 0x0000FF00) >> 8) / 255.0,
+//                      alpha: CGFloat(hexNum & 0x000000FF) / 255.0)
+//        default:
+//            self.init()
+//            return nil
+//        }
+//    }
+//
+//}
+//
+//private extension Int {
+//    var duplicate4bits: Int {
+//        return self << 4 + self
+//    }
+//}
+//
+//public extension UIColor {
+//    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+//        var red: CGFloat = 0
+//        var green: CGFloat = 0
+//        var blue: CGFloat = 0
+//        var alpha: CGFloat = 0
+//        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+//        return (red, green, blue, alpha)
+//    }
+//}

@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'LJCustBaseLib_Example' do
+  pod 'LJCustBaseLib', :path => '../'
+
+  target 'LJCustBaseLib_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

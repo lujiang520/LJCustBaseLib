@@ -1,0 +1,6 @@
+framework module Pods_LJCustBaseLib_Example {
+  umbrella header "Pods-LJCustBaseLib_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

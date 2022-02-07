@@ -1,0 +1,6 @@
+framework module LJCustBaseLib {
+  umbrella header "LJCustBaseLib-umbrella.h"
+
+  export *
+  module * { export * }
+}

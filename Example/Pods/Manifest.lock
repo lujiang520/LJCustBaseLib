@@ -1,0 +1,16 @@
+PODS:
+  - LJCustBaseLib (0.1.0)
+
+DEPENDENCIES:
+  - LJCustBaseLib (from `../`)
+
+EXTERNAL SOURCES:
+  LJCustBaseLib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LJCustBaseLib: 6ee5e1173f4cbad70fb9dfe1fe6370e2cf591a7f
+
+PODFILE CHECKSUM: 85125a026235247a4246e945d001bc8ef64f8d32
+
+COCOAPODS: 1.11.2
